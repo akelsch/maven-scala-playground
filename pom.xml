@@ -6,8 +6,15 @@
     <groupId>com.example</groupId>
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
     <name>demo</name>
     <description>My wonderful Scala app</description>
+
+    <modules>
+        <module>simple</module>
+        <module>spark</module>
+    </modules>
 
     <properties>
         <java.version>17</java.version>
@@ -21,37 +28,45 @@
         <scala.compat.version>2.13</scala.compat.version>
         <scalatest.version>3.2.13</scalatest.version>
         <!-- Plugins -->
+        <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version>
         <scala-maven-plugin.version>4.7.1</scala-maven-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <scalatest-maven-plugin.version>2.1.0</scalatest-maven-plugin.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>${scala.version}</version>
-        </dependency>
-
-        <!-- Test -->
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_${scala.compat.version}</artifactId>
-            <version>${scalatest.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.scalatestplus</groupId>
-            <artifactId>junit-4-13_${scala.compat.version}</artifactId>
-            <version>${scalatest.version}.0</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <build>
-        <sourceDirectory>src/main/scala</sourceDirectory>
-        <testSourceDirectory>src/test/scala</testSourceDirectory>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build-helper-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/main/scala</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/test/scala</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
@@ -82,6 +97,7 @@
                     <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                     <junitxml>.</junitxml>
                     <filereports>TestSuiteReport.txt</filereports>
+                    <noScalaTestIgnore>true</noScalaTestIgnore>
                 </configuration>
                 <executions>
                     <execution>
