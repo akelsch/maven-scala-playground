@@ -12,7 +12,7 @@
     <artifactId>spark</artifactId>
 
     <properties>
-        <spark.version>3.3.0</spark.version>
+        <spark.version>3.4.0</spark.version>
     </properties>
 
     <dependencies>
