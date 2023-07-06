@@ -17,16 +17,17 @@
     </modules>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependencies -->
-        <scala.version>2.13.10</scala.version>
-        <scala.compat.version>2.13</scala.compat.version>
-        <scalatest.version>3.2.15</scalatest.version>
+        <scala.version>2.12.18</scala.version>
+        <scala.compat.version>2.12</scala.compat.version>
+        <scalatest.version>3.2.16</scalatest.version>
+        <spark.version>3.3.2</spark.version>
         <!-- Plugins -->
         <build-helper-maven-plugin.version>3.4.0</build-helper-maven-plugin.version>
         <scala-maven-plugin.version>4.8.1</scala-maven-plugin.version>
